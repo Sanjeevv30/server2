@@ -11,6 +11,7 @@ const requestHandler=(req,res)=>{
       );
       res.write("</html>");
       return res.end();
+      
     }
     if (url === "/message" && method === "POST") {
       const body = [];
@@ -21,7 +22,7 @@ const requestHandler=(req,res)=>{
       return req.on("end", () => {
         const parseBody = Buffer.concat(body).toString();
         const message = parseBody.split("=")[1];
-        fs.writeFile("message.txt", message, (err) => {
+        fs.writeFile("message.txt", message, err => {
           res.statusCode = 302;
           res.setHeader("Location", "/");
           return res.end();
